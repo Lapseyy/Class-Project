@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="about-background">
+    
+    <!-- Nav Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">Edmarck Sosa</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Me</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projects.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="skills.html">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>About Me</h1>
+        <p>Hello! My name is Edmarck Sosa, and I am passionate about technology and programming. I enjoy creating web applications, solving challenging problems, and learning new skills.</p>
+        <h2>Hobbies</h2>
+        <ul>
+            <li>Skateboarding</li>
+            <li>Reading Horror Books</li>
+            <li>Gaming</li>
+            <li>Coffee</li>
+        </ul>
+
+        <!-- Resume -->
+        <h2 class="mt-5">My Resume</h2>
+        <div class="mb-4">
+            <a href="documents/Edmarck Resume 1224.pdf" class="btn btn-primary" target="_blank">Download My Resume</a>
+    
+            <!-- Embedded Resume-->
+            <div class="mt-4">
+                <iframe src="documents/Edmarck Resume 1224.pdf" width="100%" height="600px" style="border: none;"></iframe>
+            </div>
+        </div>
+    
+        <!-- Slideshow -->
+        <h2 class="mt-5">Photo Gallery</h2>
+        <button id="toggleSlideshow" class="btn btn-primary mb-3">Show Slideshow</button>
+        <div id="slideshowWrapper" class="slideshow-container minimized">
+            <div class="slide">
+                <img src="Picture/haloreach.jpeg" alt="Halo Reach" class="slide-image">
+                <div class="description">Halo Reach: A prequel to the Halo series, showcasing the fall of Reach and the sacrifices made by Noble Team.</div>
+            </div>
+            <div class="slide">
+                <img src="Picture/coffee.jpeg" alt="Coffee" class="slide-image">
+                <div class="description">You can get the Spanish Late at Urth cafe! I high recommend. I love coffee.</div>
+            </div>
+            <div class="slide">
+                <img src="Picture/dloxpizza.jpeg" alt="Delicious Pizza" class="slide-image">
+                <div class="description">This can also be gotten at Urth Cafe! A delicious salmon pizza that I always look forward to. A must try!</div>
+            </div>
+            <div class="slide">
+                <img src="Picture/shiningbook.jpg" alt="The Shining Book" class="slide-image">
+                <div class="description">The Shining (The Book or movie): A psychological horror novel by Stephen King about a family isolated in a haunted hotel.</div>
+            </div>
+            <div class="slide">
+                <img src="" alt="Warning" class="slide-image">
+                <div class="description"> <h1>WARNING! The following picture may be disturbing. Viewer advised! </h1></div>
+            </div>
+            <div class="slide">
+                <img src="Picture/jp.jpeg" alt="Jeepers Creepers" class="slide-image">
+                <div class="description">This is from Jeepers Creepers 2. This is one of the creepiest moments in cinema for me as it scared me as a child.</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slideshowWrapper = document.getElementById('slideshowWrapper');
+        const toggleButton = document.getElementById('toggleSlideshow');
+        let interval = 5000; //Makes the default slide duration to 5 seconds
+        let slideInterval;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.transform = `translateX(${(i - index) * 100}%)`;
+            });
+        }
+
+        function startSlideshow() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }, interval);
+        }
+
+        slides.forEach((slide, i) => {
+            slide.addEventListener('mouseenter', () => {
+                interval = 10000; // Set to 10 seconds when hover
+                startSlideshow();
+            });
+            slide.addEventListener('mouseleave', () => {
+                interval = 5000; // Revert to 5 seconds when not hovering
+                startSlideshow();
+            });
+            slide.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % slides.length; // Move to next slide when click
+                showSlide(currentSlide);
+            });
+        });
+
+        toggleButton.addEventListener('click', () => {
+            slideshowWrapper.classList.toggle('minimized');
+            if (slideshowWrapper.classList.contains('minimized')) {
+                toggleButton.textContent = 'Show Slideshow';
+            } else {
+                toggleButton.textContent = 'Hide Slideshow';
+            }
+        });
+
+        showSlide(currentSlide);
+        startSlideshow();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
